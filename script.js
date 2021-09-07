@@ -48,3 +48,20 @@ document.querySelector('.btn--close-cookie').addEventListener('click', function(
 
 message.style.backgroundColor = '#37383d';
 message.style.width = '120%';
+
+//SCROLL TO SECTION ONE FEATURE
+
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+btnScrollTo.addEventListener('click', function(e){
+  //current position + current scroll
+  const s1coordinates = section1.getBoundingClientRect();
+  // window.scrollTo(s1coordinates.left + window.pageXOffset, s1coordinates.top + window.pageYOffset);
+
+  window.scrollTo({
+    left: s1coordinates.left + window.pageXOffset,
+    top:s1coordinates.top + window.pageYOffset, 
+    behavior: 'smooth'
+  });
+});
