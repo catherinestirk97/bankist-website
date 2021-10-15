@@ -116,12 +116,35 @@ nav.addEventListener('mouseout', function(e){
 });
 
 //sticky navigation 
-const initialCoords = section1.getBoundingClientRect();
+// const initialCoords = section1.getBoundingClientRect();
 
-window.addEventListener('scroll', function (){
-  if(window.scrollY > initialCoords.top){
+// window.addEventListener('scroll', function (){
+//   if(window.scrollY > initialCoords.top){
+//     nav.classList.add('sticky');
+//   } else {
+//     nav.classList.remove('sticky');
+//   }
+// });
+
+//sticky navigation: intersection observer API
+const navHeight = nav.getBoundingClientRect().height;
+
+const stickyNav = function(entries){
+  const [entry] = entries;
+
+  if(!entry.isIntersecting){
     nav.classList.add('sticky');
   } else {
     nav.classList.remove('sticky');
   }
-});
+};
+
+const headerObserver = new IntersectionObserver(
+  stickyNav, {
+    root: null, 
+    threshold:0,
+    rootMargin: `-${navHeight}px`,
+  }
+);
+
+headerObserver.observe(header);
