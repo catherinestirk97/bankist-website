@@ -68,3 +68,26 @@ btnScrollTo.addEventListener('click', function(e){
 
 //easy way to do this is also:
 //section1.scrollIntoView({behaviour:'smooth});
+
+//tabbed component 
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
+
+// tabs.forEach(t=>t.addEventListener('click', ()=> console.log('TAB')));
+
+tabsContainer.addEventListener('click', function(e){
+  const clicked = e.target.closest('.operations__tab');
+  //guard clause - if nothing is clicked, return function 
+  if(!clicked) return;
+
+  //select tab, push all other tabs down
+  tabs.forEach(t => t.classList.remove('operations__tab--active'));
+  clicked.classList.add('operations__tab--active');
+
+  //remove active from tabcontent 
+  tabsContent.forEach(content => content.classList.remove('operations__content--active'))
+
+  //activate content area 
+  document.querySelector(`.operations__content--${clicked.dataset.tab}`).classList.add('operations__content--active');
+});
