@@ -37,18 +37,18 @@ document.addEventListener('keydown', function (e) {
 
 const header = document.querySelector('.header');
 
-const message = document.createElement('div');
-message.classList.add('cookie-message');
-message.textContent = "We use cookies for improved functionality and analytics";
-message.innerHTML = "We use cookies for improved functionality and analytics <button class='btn btn--close-cookie'> Got it! </button>";
-header.append(message);
+// const message = document.createElement('div');
+// message.classList.add('cookie-message');
+// message.textContent = "We use cookies for improved functionality and analytics";
+// message.innerHTML = "We use cookies for improved functionality and analytics <button class='btn btn--close-cookie'> Got it! </button>";
+// header.append(message);
 
-document.querySelector('.btn--close-cookie').addEventListener('click', function(){
-  message.remove();
-})
+// document.querySelector('.btn--close-cookie').addEventListener('click', function(){
+//   message.remove();
+// })
 
-message.style.backgroundColor = '#37383d';
-message.style.width = '120%';
+// message.style.backgroundColor = '#37383d';
+// message.style.width = '120%';
 
 //SCROLL TO SECTION ONE FEATURE
 
@@ -148,3 +148,22 @@ const headerObserver = new IntersectionObserver(
 );
 
 headerObserver.observe(header);
+
+//reveal section 
+const allSections = document.querySelectorAll('.section');
+
+const revealSection = function(entries, observer) {
+  const [entry] = entries;
+  if(!entry.isIntersecting) return;
+
+  entry.target.classList.remove('section--hidden');
+};
+
+const sectionObserver = new IntersectionObserver(revealSection, {
+  root:null,
+  threshold:0.15,
+});
+allSections.forEach(function(section){
+  sectionObserver.observe(section);
+  section.classList.add('section--hidden');
+})
